@@ -1,3 +1,4 @@
+
 class ThirdLab {
   ///////////////////////////////Первое задание//////////////////////////////
   trait PowerByTwo {
@@ -17,6 +18,7 @@ class ThirdLab {
   }
 
   object PowNumber extends PowerByTwo, PowerByThree, PowerByFour, PowerByFive {}
+
   ///////////////////////////////Второе задание//////////////////////////////
 
   trait Addable[T] {
@@ -49,6 +51,68 @@ class ThirdLab {
     }
   }
 
+  ///////////////////////////////Третье задание//////////////////////////////
+
+  trait Sum {
+    def sum(): Int
+  }
+
+  trait Prod {
+    def prod(): Int
+  }
+
+  trait Avg {
+    def avg(): Double
+  }
+
+
+  class MyList extends Sum, Prod, Avg {
+    private var vector: Vector[Int] = Vector[Int]()
+
+    def add(elem: Int): Unit = {
+      vector = vector :+ elem
+    }
+
+    def remove(ind: Int): Unit = {
+      if (ind < 0 || ind >= vector.length) {
+        println(s"Индекс $ind вне диапазона.")
+      } else {
+        vector = vector.take(ind) ++ vector.drop(ind + 1)
+      }
+    }
+
+    def get(ind: Int): Int = {
+      if (ind >= vector.length) {
+        throw new Exception("Индекс за пределами границ массива")
+      }
+      else {
+        vector(ind)
+      }
+    }
+
+    def printList(): Unit = {
+      print("Элементы списка: ")
+      vector.foreach(elem => print(elem.toString + " "))
+      print("\n")
+    }
+
+    override def sum(): Int = {
+      vector.sum()
+    }
+
+    override def prod(): Int = {
+      var prod = 1
+      vector.foreach(elem => {
+        prod = prod * elem
+      })
+      prod
+    }
+
+    override def avg(): Double = {
+      vector.sum / vector.length.toDouble
+    }
+  }
+
 }
 
 object Main3 {
@@ -67,5 +131,18 @@ object Main3 {
     queue.remove()
     queue.printQ()
     queue.add(22)
+    //Третье задание
+    val myList = thirdLab.MyList()
+    myList.add(1)
+    myList.add(2)
+    myList.add(3)
+    myList.add(4)
+    myList.add(5)
+    myList.printList()
+    myList.remove(4)
+    myList.printList()
+    println(myList.sum())
+    println(myList.prod())
+    println(myList.avg())
   }
 }

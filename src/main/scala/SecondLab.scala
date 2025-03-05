@@ -68,7 +68,7 @@ class SecondLab {
 
   class Computer extends ComputerTech {
     protected var isPower = true
-    private val listOfComponents = List[ComputerComponent](Processor(), MotherBoard(), HardDisk()) //TODO
+    private val listOfComponents = List[ComputerComponent](Processor(), MotherBoard(), HardDisk()) 
     var powerConsumption: Int = listOfComponents.map(_.powerConsumption).sum()
 
 
@@ -142,7 +142,6 @@ object Main2 {
     secondLab.Monitor().run()
     secondLab.KeyBoard().run()
     secondLab.Printer().run()
-    secondLab.Monitor().run()
     secondLab.Computer().run()
   }
 }
